@@ -2,7 +2,8 @@
   <div>
       <nav class="blue"></nav>
       <div class="container center">
-            <div class="row" style="margin:0,auto; width:50%;" >
+       
+            <div class="row"  >
               <div class="col s12 m12 l12">
                 <div class="card">
                   <div class="card-content">
@@ -14,7 +15,9 @@
                       </form>
                   </div>
                   <div class="card-action">
-                  <router-link to="/registro">Registrarse</router-link>
+                    <router-link to="/registro">Registrarse</router-link>
+                    <!-- <input type="text" v-model="msg">
+                    <button @click="guardar">Guardar</button> -->
                   </div>
                 </div>
               </div>
@@ -25,30 +28,32 @@
 </template>
 
 <script>
+import axios from 'axios'
+import swal from 'sweetalert'
+
 export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  name: 'iniciarSesion',  
+  methods:{
+    login() {
+            const form = document.getElementById('inicioSesion');
+            axios.post('http://localhost/snippetWebpack/api/loginRegistro/login.php', new FormData(form))
+                .then(resp => {
+                   
+                    if (resp.data.res == 'success') {
+                        this.$router.push('inicio');
+                    } else {
+                        swal('Ususrio y/o contraseña incorrecta');
+                    }
+                });
+        }
+  },
+  created(){
+    const token  = JSON.parse(this.$localStorage.get('token'));
+    if(token){
+      alert(token);
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+

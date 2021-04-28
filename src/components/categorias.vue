@@ -26,9 +26,11 @@
                             <p>{{item.descripcion}}</p>
                         </div>
                         <div class="card-action">
-                           <router-link v-if="item.user == userPost" :to="'/editar/'+item.id">EDITAR</router-link>
+                            <router-link v-if="item.user == userPost" :to="'/editar/'+item.id">EDITAR</router-link>
+                           
+                           
                             <a v-if="item.user == userPost" href="#" @click="eliminar(item.id)">ELIMINAR</a>
-                            <button v-clipboard="item.codigo" class="btn blue">COPIAR</button>
+                           <button v-clipboard="item.codigo" class="btn blue">COPIAR</button>
                         </div>
                     </div>
                 </div>
@@ -47,7 +49,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 
 export default {
-    name:'inicio',
+    name:'categorias',
     data(){
         return{
                 respuesta: '',
@@ -56,10 +58,14 @@ export default {
                 userPost: '',
               
         }
-    },
+    },   
     created(){
         this.getCategoria();
         this.getUser();
+    },
+     beforeRouteUpdate(to,from, next){
+         next();
+        this.getCategoria();
     },
     computed:{
              datosFiltrados() {
@@ -77,10 +83,10 @@ export default {
                 });
         },
         getCategoria(){
-                 axios.get('http://localhost/snippetWebpack/api/crud/getPost.php')
+            const cat = this.$route.params.cat
+               axios.get('http://localhost/snippetWebpack/api/crud/getCategoria.php?cat=' + cat)
                     .then(resp => {
                         this.listar = resp.data;
-                        // console.log(listar);
                     });
         }
     },

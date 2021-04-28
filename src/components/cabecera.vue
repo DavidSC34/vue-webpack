@@ -3,14 +3,15 @@
         <nav class="blue">
             <div class="nav-wrapper" >
                 <ul id="nav-movile" class="right hide-on-med-and-down">
-                    <li><a href="index.php"><i class="material-icons">home</i></a></li>
-                    <li><a href="alta.php"><i class="material-icons">add</i></a></li>
-                    <li><a href="index.php?cat=php">PHP</a></li>
-                    <li><a href="index.php?cat=css">CSS</a></li>
-                    <li><a href="index.php?cat=html5">HTML5</a></li>
-                    <li><a href="index.php?cat=vue">VUE</a></li>
-                    <li><a href="index.php?cat=mysql">MYSQL</a></li>
-                    <li><a href="#" @click="salir">SALIR</a></li>
+                    <li><router-link to="/inicio"><i class="material-icons">home</i></router-link></li>
+                    <li><router-link to="/alta"><i class="material-icons">add</i></router-link></li>                   
+
+                    <li><router-link to="/categorias/php">PHP</router-link></li>
+                    <li> <router-link to="/categorias/css">CSS</router-link></li>
+                   <li><router-link to="/categorias/html5">HTML5</router-link></li>
+                   <li><router-link to="/categorias/vue">VUE</router-link></li>
+                   <li><router-link to="/categorias/mysql">MYSQL</router-link></li>
+                   <li><a href="#" @click="salir">SALIR</a></li>
                 </ul>
             </div>
         </nav>

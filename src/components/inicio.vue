@@ -1,14 +1,20 @@
 <template>
     <div>
-    <nav class="blue"></nav>
-    <h1>Principal</h1>
+            <cabecera></cabecera>
+            <h1>Principal</h1>
 
     </div>
 
 </template>
 
 <script>
+import cabecera from './cabecera'
+import sesion from '../mixins/sesion'
 export default {
-    name:'inicio'
+    name:'inicio',
+    components:{
+        cabecera
+    },
+    mixins:[sesion]
 }
 </script>

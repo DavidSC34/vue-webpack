@@ -40,6 +40,7 @@ export default {
                 .then(resp => {
                    
                     if (resp.data.res == 'success') {
+                      this.$localStorage.set('token',JSON.stringify(resp.data.token))
                         this.$router.push('inicio');
                     } else {
                         swal('Ususrio y/o contraseña incorrecta');
@@ -50,7 +51,7 @@ export default {
   created(){
     const token  = JSON.parse(this.$localStorage.get('token'));
     if(token){
-      alert(token);
+      this.$router.push('inicio');
     }
   }
 }
